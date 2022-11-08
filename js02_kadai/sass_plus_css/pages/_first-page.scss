@@ -1,0 +1,36 @@
+@use "../base/variables" as v;
+@use "../base/responsive" as r;
+
+
+/*---------------------------------
+ first-pageの記述
+---------------------------------*/
+.first-page {
+    background-image: url(../img/pages/first-page_img01.jpg);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    &__inner {
+        width: 45%;
+        height: 300px;
+        background-color: rgba(0, 0, 0);
+    }
+    &__heading {
+        color: white;
+        text-align: center;
+        @include r.font-size(44);
+        margin-top: 30px;
+    }
+    &__sub {
+        display: block;
+        @include r.font-size(28);
+        margin-top: 20px;
+    }
+    &__button-area {
+        text-align: center;
+        margin-top: 50px;
+    }
+}

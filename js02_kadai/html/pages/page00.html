@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../sass_plus_css/styles.css">
+</head>
+<body>
+    
+    <div class="page00">
+        <div class="page00__global-nav-button"><span></span><span></span><span></span></div>
+        <nav class="page00__global-nav">
+            <div class="page00__global-nav-inner g-nav-inner">
+                <ul>
+                    <li><a href="#">過去にした言動一覧</a></li>
+                    <li><a href="#">所持しているカード一覧</a></li>
+                    <li><a href="#">セーブ</a></li>
+                    <li><a href="#">スタート画面に戻る</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="page00__words-and-deeds">
+            <h2 class="page00__words-and-deeds-heading">どんな言動をする？</h2>
+            <div class="page00__card-choice">
+                <p class="page00__card-choice-heading">使用するカード</p>
+                <ul class="page00__cards">
+                    <li><input class="page00__card" type="checkbox" name="words-and-deeds" value="">男フォルダに入れ</li>
+                    <li><input class="page00__card" type="checkbox" name="words-and-deeds" value="">うまくいじって上下関係を築け</li>
+                    <li><input class="page00__card" type="checkbox" name="words-and-deeds" value="">タイムコンストレインメソッド</li>
+                    <li><input class="page00__card" type="checkbox" name="words-and-deeds" value="">Cフェーズ</li>
+                    <li><input class="page00__card" type="checkbox" name="words-and-deeds" value="">恋愛遍歴の話を引き出せ</li>
+                </ul>
+            </div>
+            <div class="page00__entry">
+                <p class="page00__entry-heading">カードをもとに言動を入力</p>
+                <textarea class="page00__entry-textarea" name="" id="" cols="30" rows="10" placeholder="テストテストテストテスト"></textarea>
+            </div>
+            <button class="page00__words-and-deeds-button">確定</button>
+        </div>
+        <div class="page00__inner">
+            <canvas class="page00__canvas" id="canvas"></canvas>
+        </div>
+        <div class="page00__button-area">
+            <button class="page00__display-choices-button js-display-choices-button">言動の入力に進む</button>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="../../js/pages/page00.js"></script>
+</body>
+</html>
