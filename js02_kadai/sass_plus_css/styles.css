@@ -550,7 +550,7 @@ a.button-border-gradient {
   right: -120%;
   width: 100%;
   height: 100vh; /*ナビの高さ*/
-  background: #999;
+  background: #555555;
   /*動き*/
   transition: all 0.6s;
 }
@@ -566,7 +566,7 @@ a.button-border-gradient {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
-.page00__global-nav ul {
+.page00__global-nav-lists {
   /*ナビゲーション天地中央揃え*/
   position: absolute;
   z-index: 999;
@@ -574,25 +574,29 @@ a.button-border-gradient {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.page00__global-nav li {
-  list-style: none;
+.page00__global-nav-item {
   text-align: center;
-}
-.page00__global-nav li a {
-  color: #333;
-  text-decoration: none;
-  padding: 10px;
-  display: block;
-  text-transform: uppercase;
+  color: #fff;
+  padding: 25px;
   letter-spacing: 0.1em;
   font-weight: bold;
+  font-size: 2.8rem;
+}
+.page00__global-nav-lists-of-done {
+  display: none;
+  color: #fff;
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .page00__words-and-deeds {
   position: absolute;
-  top: 20vh;
+  top: 10vh;
   left: 20%;
   width: 60%;
-  height: 60vh;
+  height: 80vh;
   background-color: rgba(255, 255, 255, 0.8);
   display: none;
   flex-flow: column nowrap;
@@ -601,6 +605,21 @@ a.button-border-gradient {
 }
 .page00__words-and-deeds-heading {
   font-size: 3.2rem;
+}
+.page00__title-area {
+  text-align: center;
+}
+.page00__title-area-heading {
+  text-align: center;
+  font-size: 2rem;
+}
+.page00__title-area-input {
+  text-align: left;
+  width: 200px;
+  height: 30px;
+  margin-top: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
 }
 .page00__card-choice-heading {
   text-align: center;
@@ -613,10 +632,13 @@ a.button-border-gradient {
   text-align: center;
 }
 .page00__entry-heading {
+  text-align: center;
   font-size: 2rem;
 }
 .page00__entry-textarea {
   text-align: left;
+  width: 200px;
+  height: 100px;
   margin-top: 10px;
   border: 1px solid #333;
   border-radius: 5px;

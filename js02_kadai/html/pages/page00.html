@@ -13,31 +13,39 @@
         <div class="page00__global-nav-button"><span></span><span></span><span></span></div>
         <nav class="page00__global-nav">
             <div class="page00__global-nav-inner g-nav-inner">
-                <ul>
-                    <li><a href="#">過去にした言動一覧</a></li>
-                    <li><a href="#">所持しているカード一覧</a></li>
-                    <li><a href="#">セーブ</a></li>
-                    <li><a href="#">スタート画面に戻る</a></li>
+                <ul class="page00__global-nav-lists js-gnav-lists">
+                    <li class="page00__global-nav-item js-lists-of-done">過去にした言動一覧</li>
+                    <li class="page00__global-nav-item js-cards-of-having">所持しているカード一覧</li>
+                    <li class="page00__global-nav-item js-save-the-data">セーブ</li>
+                    <li class="page00__global-nav-item js-return-to-start">スタート画面に戻る</li>
                 </ul>
+                <div class="page00__global-nav-lists-of-done js-lists-of-done-div">
+                    <h2 class="page00__global-nav-lists-of-done-heading">過去にした言動一覧</h2>
+                    <button class="page00__global-nav-lists-of-done-button js-lists-of-done-button">メニューに戻る</button>
+                </div>
             </div>
         </nav>
         <div class="page00__words-and-deeds">
             <h2 class="page00__words-and-deeds-heading">どんな言動をする？</h2>
+            <div class="page00__titile-area">
+                <p class="page00__title-area-heading">【言動のタイトル】</p>
+                <input class="page00__title-area-input js-words-and-deeds-title" type="text" placeholder="ここに言動のタイトルを入力してください">
+            </div>
             <div class="page00__card-choice">
-                <p class="page00__card-choice-heading">使用するカード</p>
+                <p class="page00__card-choice-heading">【使用するカード】</p>
                 <ul class="page00__cards">
-                    <li><input class="page00__card" type="checkbox" name="words-and-deeds" value="">男フォルダに入れ</li>
-                    <li><input class="page00__card" type="checkbox" name="words-and-deeds" value="">うまくいじって上下関係を築け</li>
-                    <li><input class="page00__card" type="checkbox" name="words-and-deeds" value="">タイムコンストレインメソッド</li>
-                    <li><input class="page00__card" type="checkbox" name="words-and-deeds" value="">Cフェーズ</li>
-                    <li><input class="page00__card" type="checkbox" name="words-and-deeds" value="">恋愛遍歴の話を引き出せ</li>
+                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="1" data-savekey="1">男フォルダに入れ</li>
+                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="2" data-savekey="2">うまくいじって上下関係を築け</li>
+                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="3" data-savekey="3">タイムコンストレインメソッド</li>
+                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="4" data-savekey="4">Cフェーズ</li>
+                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="5" data-savekey="5">恋愛遍歴の話を引き出せ</li>
                 </ul>
             </div>
             <div class="page00__entry">
-                <p class="page00__entry-heading">カードをもとに言動を入力</p>
-                <textarea class="page00__entry-textarea" name="" id="" cols="30" rows="10" placeholder="テストテストテストテスト"></textarea>
+                <p class="page00__entry-heading">【カードをもとに言動を入力】</p>
+                <textarea class="page00__entry-textarea js-words-and-deeds-text" placeholder="ここに言動を入力してください"></textarea>
             </div>
-            <button class="page00__words-and-deeds-button">確定</button>
+            <button class="page00__words-and-deeds-button js-words-and-deeds-button">確定</button>
         </div>
         <div class="page00__inner">
             <canvas class="page00__canvas" id="canvas"></canvas>

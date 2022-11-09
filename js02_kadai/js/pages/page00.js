@@ -72,7 +72,7 @@ class Game {
 		for (let i=0; i<this.objs.length; i++) {
 			//ゲームに登場するもののクラスから、render()を呼び出す
 			this.objs[i].render( this.ctx, this.frame );
-			console.log(this.objs[i], "vvv")
+			// console.log(this.objs[i], "vvv")
 		}
 
 		//フレーム
@@ -181,6 +181,9 @@ label.maxLength = 32;
 game.add( label, 0, 0 );
 
 //キーボードが押された時
+// const abc = document.querySelector('.page00__inner');
+// if(abc.css.display != none){}
+// const abc = document.querySelector('#canvas');
 addEventListener( "keydown", (event) => {
 	const key_code = event.keyCode;
 	//先ほど登録したスペースキーが押された時、label.next()を実行
@@ -188,7 +191,8 @@ addEventListener( "keydown", (event) => {
 		game.area();
 		label.next();
 	}
-	event.preventDefault();		//方向キーでブラウザがスクロールしないようにする
+	//方向キーでブラウザがスクロールしないようにする
+	// event.preventDefault();
 }, false);
 
 //ゲームスタート
@@ -209,15 +213,90 @@ $('.js-display-choices-button').on('click', function(){
 });
 
 
+
 // グローバルナビゲーションのギミック
 $(".page00__global-nav-button").click(function () {//ボタンがクリックされたら
 	$(this).toggleClass('active');//ボタン自身に activeクラスを付与し
     $(".page00__global-nav").toggleClass('panelactive');//ナビゲーションにpanelactiveクラスを付与
 });
 
-// $("#g-nav a").click(function () {//ナビゲーションのリンクがクリックされたら
-//     $(".openbtn").removeClass('active');//ボタンの activeクラスを除去し
-//     $("#g-nav").removeClass('panelactive');//ナビゲーションのpanelactiveクラスも除去
-// });
 
-//canvasでは消すのはclearRectしかない！！
+
+// グローバルナビゲーション内の画面遷移
+$(".js-lists-of-done").click(function () {
+	$('.js-gnav-lists').css('display', 'none');
+	$('.js-lists-of-done-div').css('display', 'block');
+});
+$(".js-lists-of-done-button").click(function () {
+	$('.js-lists-of-done-div').css('display', 'none');
+	$('.js-gnav-lists').css('display', 'block');
+});
+
+
+
+// 入力した言動をローカルストレージに保存するギミック
+$(".js-words-and-deeds-button").on("click", function(){
+	let titleAsKey = $(".js-words-and-deeds-title").val();
+	let value = {
+		cards: $(".js-words-and-deeds-cards").val(),
+		text: $(".js-words-and-deeds-text").val()
+		// ranking: $("#ranking").val(),
+		// player_name: $("#player_name").val(),
+		// memo: $("#memo").val(),
+	};
+	localStorage.setItem(titleAsKey, JSON.stringify(value));//JSONに変換
+	//変数を渡すときは、ダブルクオーテーション等でくくらないこと！！
+	// const html = '<tr><th>'+key+'</th><td>'+value.ranking+'</td><td>'+value.player_name+'</td><td>'+value.memo+'</td></tr>';
+	// $("#list").append(html);
+});
+
+
+
+function alertDebug(arg) {
+	//alert(arg);   // ﾃﾞﾊﾞｯｸﾞ時に有効化すると良い
+ }
+
+function save_restore1_checkbox(target_class) {
+	var cbstate;
+
+	window.addEventListener('load', function () {
+		cbstate = JSON.parse(localStorage['CBState'] || '{}');
+		alertDebug('cbstate = ' + JSON.stringify(cbstate));
+		for (var key in cbstate) { // cbstateはobjectで、このようにforﾙｰﾌﾟすると var key はobjectのｷｰが来るのだ。知らなんだ。
+			alertDebug('key=' + key);
+			var el_lst = document.querySelectorAll('input[data-savekey="' + key + '"].' + target_class);
+			set_checkbox_checked_all(el_lst, true);
+		}
+
+		var cb = document.getElementsByClassName(target_class);
+		alertDebug('cb = ' + JSON.stringify(cb));
+
+		for (var c = 0; c < cb.length; c++) {
+			alertDebug('cb[' + c + ']:name=' + cb[c].name + ', value=' + cb[c].value);
+
+			cb[c].addEventListener('click', function (evt) {
+				var savekey = this.getAttribute('data-savekey');
+				alertDebug('click:savekey_value=' + savekey + ', checked=' + this.checked);
+				if (this.checked) {
+				cbstate[savekey] = true;
+				}
+				else if (cbstate[savekey]) {
+				delete cbstate[savekey];
+				}
+				localStorage['CBState'] = JSON.stringify(cbstate);
+			});
+		}
+	});
+
+	function set_checkbox_checked_all(el_lst, checked) {
+		for (var c = 0; c < el_lst.length; c++) {
+			var el = el_lst[c];
+			alertDebug('el=' + JSON.stringify(el) + ' ,el.name=' + el.name);
+			if (el) {
+				alertDebug('el.checked=' + el.checked);
+				el.checked = checked;
+			}
+		}
+	}
+}
+save_restore1_checkbox('js-words-and-deeds-cards');
