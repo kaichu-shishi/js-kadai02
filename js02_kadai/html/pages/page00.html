@@ -10,7 +10,7 @@
 <body>
     
     <div class="page00">
-        <div class="page00__global-nav-button"><span></span><span></span><span></span></div>
+        <div class="page00__global-nav-button js-global-nav-button"><span></span><span></span><span></span></div>
         <nav class="page00__global-nav">
             <div class="page00__global-nav-inner g-nav-inner">
                 <ul class="page00__global-nav-lists js-gnav-lists">
@@ -21,7 +21,23 @@
                 </ul>
                 <div class="page00__global-nav-lists-of-done js-lists-of-done-div">
                     <h2 class="page00__global-nav-lists-of-done-heading">過去にした言動一覧</h2>
+                    <ul class="page00__global-nav-lists-of-done-lists">
+                        <li class="page00__global-nav-lists-of-done-item js-lists-of-done-title"></li>
+                        <li class="page00__global-nav-lists-of-done-item js-lists-of-done-cards"></li>
+                        <li class="page00__global-nav-lists-of-done-item js-lists-of-done-text"></li>
+                    </ul>
                     <button class="page00__global-nav-lists-of-done-button js-lists-of-done-button">メニューに戻る</button>
+                </div>
+                <div class="page00__global-nav-cards-of-having js-cards-of-having-div">
+                    <h2 class="page00__global-nav-cards-of-having-heading">所持しているカード一覧</h2>
+                    <ul class="page00__global-nav-cards-of-having-lists">
+                        <li class="page00__global-nav-cards-of-having-item magic-card">男フォルダに入れ</li>
+                        <li class="page00__global-nav-cards-of-having-item magic-card">うまくいじって上下関係を築け</li>
+                        <li class="page00__global-nav-cards-of-having-item magic-card">タイムコンストレインメソッド</li>
+                        <li class="page00__global-nav-cards-of-having-item magic-card">Cフェーズ</li>
+                        <li class="page00__global-nav-cards-of-having-item magic-card">恋愛遍歴の話を引き出せ</li>
+                    </ul>
+                    <button class="page00__global-nav-cards-of-having-button js-cards-of-having-button">メニューに戻る</button>
                 </div>
             </div>
         </nav>
@@ -34,23 +50,30 @@
             <div class="page00__card-choice">
                 <p class="page00__card-choice-heading">【使用するカード】</p>
                 <ul class="page00__cards">
-                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="1" data-savekey="1">男フォルダに入れ</li>
-                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="2" data-savekey="2">うまくいじって上下関係を築け</li>
-                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="3" data-savekey="3">タイムコンストレインメソッド</li>
-                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="4" data-savekey="4">Cフェーズ</li>
-                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="5" data-savekey="5">恋愛遍歴の話を引き出せ</li>
+                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="男フォルダに入れ" data-savekey="男フォルダに入れ" id="男フォルダに入れ">男フォルダに入れ</li>
+                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="うまくいじって上下関係を築け" data-savekey="うまくいじって上下関係を築け" id="うまくいじって上下関係を築け">うまくいじって上下関係を築け</li>
+                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="タイムコンストレインメソッド" data-savekey="タイムコンストレインメソッド" id="タイムコンストレインメソッド">タイムコンストレインメソッド</li>
+                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="Cフェーズ" data-savekey="Cフェーズ" id="Cフェーズ">Cフェーズ</li>
+                    <li><input class="page00__card js-words-and-deeds-cards" type="checkbox" name="words-and-deeds" value="恋愛遍歴の話を引き出せ" data-savekey="恋愛遍歴の話を引き出せ" id="恋愛遍歴の話を引き出せ">恋愛遍歴の話を引き出せ</li>
                 </ul>
             </div>
             <div class="page00__entry">
                 <p class="page00__entry-heading">【カードをもとに言動を入力】</p>
                 <textarea class="page00__entry-textarea js-words-and-deeds-text" placeholder="ここに言動を入力してください"></textarea>
             </div>
-            <button class="page00__words-and-deeds-button js-words-and-deeds-button">確定</button>
+            <!-- <button class="page00__words-and-deeds-button js-words-and-deeds-button">確定</button> -->
+            <div class="page00__confirm-button-area">
+                <div class="page00__confirm-button button-border-gradient-wrap button-border-gradient-wrap--gold">
+                    <a href="#" class="page00__confirm-button-as-link button button-border-gradient js-words-and-deeds-confirm-button">
+                        <span class="button-text-gradient--gold">確定</span>
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="page00__inner">
             <canvas class="page00__canvas" id="canvas"></canvas>
         </div>
-        <div class="page00__button-area">
+        <div class="page00__next-step-button-area">
             <button class="page00__display-choices-button js-display-choices-button">言動の入力に進む</button>
         </div>
     </div>

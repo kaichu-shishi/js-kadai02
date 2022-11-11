@@ -214,6 +214,7 @@ $('.js-display-choices-button').on('click', function(){
 
 
 
+
 // グローバルナビゲーションのギミック
 $(".page00__global-nav-button").click(function () {//ボタンがクリックされたら
 	$(this).toggleClass('active');//ボタン自身に activeクラスを付与し
@@ -222,81 +223,159 @@ $(".page00__global-nav-button").click(function () {//ボタンがクリックさ
 
 
 
+
+
+// 「過去にした言動一覧」のメニューを開いているときの設定
+// let abc = document.getElementsByClassName('js-lists-of-done-div')[0];
+// let abcd = getComputedStyle(abc).display;
+// console.log(abcd);
+// if( abcd == 'block' ){
+// 	alert('上手く動作しているよ！');
+// }
+
 // グローバルナビゲーション内の画面遷移
 $(".js-lists-of-done").click(function () {
 	$('.js-gnav-lists').css('display', 'none');
 	$('.js-lists-of-done-div').css('display', 'block');
+
+	for(let i=0; i<localStorage.length; i++){
+		// let wordsAndDeedsObj= {};
+        let titleAsKey = localStorage.key(i);
+        let values = JSON.parse(localStorage.getItem(titleAsKey));
+        console.log(values);
+
+		const titleHtml = `言動のタイトル：${titleAsKey}`;
+		const cardsHtml = `選んだカード：${values.cardsUsed}`;
+		const textHtml = `実際にした言動：${values.wordsAndDeeds}`;
+
+        $(".js-lists-of-done-title").append(titleHtml);
+		$(".js-lists-of-done-cards").append(cardsHtml);
+		$(".js-lists-of-done-text").append(textHtml);
+    }
 });
 $(".js-lists-of-done-button").click(function () {
 	$('.js-lists-of-done-div').css('display', 'none');
+	$('.js-gnav-lists').css('display', 'block');
+
+	$(".js-lists-of-done-title").empty();
+	$(".js-lists-of-done-cards").empty();
+	$(".js-lists-of-done-text").empty();
+});
+
+
+
+$(".js-cards-of-having").click(function () {
+	$('.js-gnav-lists').css('display', 'none');
+	$('.js-cards-of-having-div').css('display', 'block');
+});
+$(".js-cards-of-having-button").click(function () {
+	$('.js-cards-of-having-div').css('display', 'none');
 	$('.js-gnav-lists').css('display', 'block');
 });
 
 
 
-// 入力した言動をローカルストレージに保存するギミック
-$(".js-words-and-deeds-button").on("click", function(){
-	let titleAsKey = $(".js-words-and-deeds-title").val();
-	let value = {
-		cards: $(".js-words-and-deeds-cards").val(),
-		text: $(".js-words-and-deeds-text").val()
-		// ranking: $("#ranking").val(),
-		// player_name: $("#player_name").val(),
-		// memo: $("#memo").val(),
-	};
-	localStorage.setItem(titleAsKey, JSON.stringify(value));//JSONに変換
-	//変数を渡すときは、ダブルクオーテーション等でくくらないこと！！
-	// const html = '<tr><th>'+key+'</th><td>'+value.ranking+'</td><td>'+value.player_name+'</td><td>'+value.memo+'</td></tr>';
-	// $("#list").append(html);
+$(".js-global-nav-button").click(function () {
+	$('.js-lists-of-done-div').css('display', 'none');
+	$('.js-cards-of-having-div').css('display', 'none');
+	$('.js-gnav-lists').css('display', 'block');
+
+	$(".js-lists-of-done-title").empty();
+	$(".js-lists-of-done-cards").empty();
+	$(".js-lists-of-done-text").empty();
 });
 
 
 
-function alertDebug(arg) {
-	//alert(arg);   // ﾃﾞﾊﾞｯｸﾞ時に有効化すると良い
- }
 
-function save_restore1_checkbox(target_class) {
-	var cbstate;
 
-	window.addEventListener('load', function () {
-		cbstate = JSON.parse(localStorage['CBState'] || '{}');
-		alertDebug('cbstate = ' + JSON.stringify(cbstate));
-		for (var key in cbstate) { // cbstateはobjectで、このようにforﾙｰﾌﾟすると var key はobjectのｷｰが来るのだ。知らなんだ。
-			alertDebug('key=' + key);
-			var el_lst = document.querySelectorAll('input[data-savekey="' + key + '"].' + target_class);
-			set_checkbox_checked_all(el_lst, true);
-		}
 
-		var cb = document.getElementsByClassName(target_class);
-		alertDebug('cb = ' + JSON.stringify(cb));
 
-		for (var c = 0; c < cb.length; c++) {
-			alertDebug('cb[' + c + ']:name=' + cb[c].name + ', value=' + cb[c].value);
+// 入力した言動をローカルストレージに保存するギミック
+$(".js-words-and-deeds-confirm-button").on("click", function(){
+	let cards = document.getElementsByClassName('js-words-and-deeds-cards')
+	let cardsLength = cards.length;
+	let cardsUsedArray = [];
+	// let cardsUsedObj = {};
 
-			cb[c].addEventListener('click', function (evt) {
-				var savekey = this.getAttribute('data-savekey');
-				alertDebug('click:savekey_value=' + savekey + ', checked=' + this.checked);
-				if (this.checked) {
-				cbstate[savekey] = true;
-				}
-				else if (cbstate[savekey]) {
-				delete cbstate[savekey];
-				}
-				localStorage['CBState'] = JSON.stringify(cbstate);
-			});
-		}
-	});
+	for(let i=0; i < cardsLength; i++){
+		if( cards[i].checked ){
+			let name = cards[i].id;
+			// console.log(name);
+			cardsUsedArray.push(name);
+			// let checkbox = cards[i].checked;
+			// cardsUsedObj[name]=checkbox
 
-	function set_checkbox_checked_all(el_lst, checked) {
-		for (var c = 0; c < el_lst.length; c++) {
-			var el = el_lst[c];
-			alertDebug('el=' + JSON.stringify(el) + ' ,el.name=' + el.name);
-			if (el) {
-				alertDebug('el.checked=' + el.checked);
-				el.checked = checked;
-			}
+			// let cardsUsed = {
+			// 	name: checked
+			// };
+			// {
+			// 	cards[i].id : cards[i].checked
+			// };
+			// cardsUsed[i].key = name;
+			// cardsUsed[i].value = checked;			
 		}
 	}
-}
-save_restore1_checkbox('js-words-and-deeds-cards');
+	// console.log(cardsUsedObj);
+	// console.log(cardsUsedArray);
+
+	let titleAsKey = $(".js-words-and-deeds-title").val();
+	let values = {
+		cardsUsed: cardsUsedArray,
+		wordsAndDeeds: $(".js-words-and-deeds-text").val()
+	};
+	localStorage.setItem(titleAsKey, JSON.stringify(values));//JSONに変換
+});
+
+
+
+
+
+// function alertDebug(arg) {
+// 	//alert(arg);   // ﾃﾞﾊﾞｯｸﾞ時に有効化すると良い
+//  }
+
+// function save_restore1_checkbox(target_class) {
+// 	var cbstate;
+
+// 	window.addEventListener('load', function () {
+// 		cbstate = JSON.parse(localStorage['CBState'] || '{}');
+// 		alertDebug('cbstate = ' + JSON.stringify(cbstate));
+// 		for (var key in cbstate) { // cbstateはobjectで、このようにforﾙｰﾌﾟすると var key はobjectのｷｰが来るのだ。知らなんだ。
+// 			alertDebug('key=' + key);
+// 			var el_lst = document.querySelectorAll('input[data-savekey="' + key + '"].' + target_class);
+// 			set_checkbox_checked_all(el_lst, true);
+// 		}
+
+// 		var cb = document.getElementsByClassName(target_class);
+// 		alertDebug('cb = ' + JSON.stringify(cb));
+
+// 		for (var c = 0; c < cb.length; c++) {
+// 			alertDebug('cb[' + c + ']:name=' + cb[c].name + ', value=' + cb[c].value);
+
+// 			cb[c].addEventListener('click', function (evt) {
+// 				var savekey = this.getAttribute('data-savekey');
+// 				alertDebug('click:savekey_value=' + savekey + ', checked=' + this.checked);
+// 				if (this.checked) {
+// 				cbstate[savekey] = true;
+// 				}
+// 				else if (cbstate[savekey]) {
+// 				delete cbstate[savekey];
+// 				}
+// 				localStorage['CBState'] = JSON.stringify(cbstate);
+// 			});
+// 		}
+// 	});
+
+// 	function set_checkbox_checked_all(el_lst, checked) {
+// 		for (var c = 0; c < el_lst.length; c++) {
+// 			var el = el_lst[c];
+// 			alertDebug('el=' + JSON.stringify(el) + ' ,el.name=' + el.name);
+// 			if (el) {
+// 				alertDebug('el.checked=' + el.checked);
+// 				el.checked = checked;
+// 			}
+// 		}
+// 	}
+// }
+// save_restore1_checkbox('js-words-and-deeds-cards');
